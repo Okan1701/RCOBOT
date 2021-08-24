@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="appsettings.json" CopyToOutputDirectory="Always" />
-    <None Update="appsettings.Example.json" CopyToOutputDirectory="Always" />
+    <None Update="appsettings.json" CopyToOutputDirectory="Always" ExcludeFromSingleFile="true" />
+    <None Update="appsettings.Example.json" CopyToOutputDirectory="Always" ExcludeFromSingleFile="true" />
   </ItemGroup>
 
   <ItemGroup>
