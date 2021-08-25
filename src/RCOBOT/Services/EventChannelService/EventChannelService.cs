@@ -172,6 +172,8 @@ namespace RCOBOT.Services.EventChannelService
         {
             switch (channelType)
             {
+                case "(Global)":
+                    return Color.DarkerGrey;
                 case "(Side)":
                     return Color.Blue;
                 case "(Vehicle)":
