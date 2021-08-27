@@ -87,8 +87,9 @@ namespace RCOBOT.Services.RCON.Implementations
         /// Create a player joined event object containing data from the raw message
         /// </summary>
         /// <param name="message">The raw join message</param>
+        /// <param name="ignoreSuffixCount">How many words at the END of message should be ignored</param>
         /// <returns>Event object containing the joined player info</returns>
-        private PlayerConnectedEventArgs GetJoinedEventArgs(string message)
+        private PlayerConnectedEventArgs GetJoinedEventArgs(string message, int ignoreSuffixCount = 2)
         {
             string name = "";
             int id = int.Parse(message.Substring(8, 1));
@@ -96,7 +97,7 @@ namespace RCOBOT.Services.RCON.Implementations
             // Extract player name
             string[] splitStr = message.Split(" ");
             // We skip the first 2 words since those are not part of the name
-            for (int i = 2; i < (splitStr.Length - 2); i++)
+            for (int i = 2; i < (splitStr.Length - ignoreSuffixCount); i++)
             { // Add white space if needed for multi word names
                 name += i == 2 ? splitStr[i] : $" {splitStr[i]}";
             }
@@ -120,7 +121,7 @@ namespace RCOBOT.Services.RCON.Implementations
             // With the current code base, the event object for both joining and leaving is identical
             // So we'll reuse the GetJoinedEventArgs method and then turn that result into a PlayerDisconnectEventArgs event
             // since the data will be identical
-            var joinArgs = GetJoinedEventArgs(message);
+            var joinArgs = GetJoinedEventArgs(message, 1);
             return new PlayerDisconnectEventArgs
             {
                 EventTime = joinArgs.EventTime,

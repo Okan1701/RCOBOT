@@ -37,6 +37,21 @@ namespace RCOBOT.Tests
         }
         
         [Theory]
+        [InlineData("Player #5 UltimateAntic disconnected", "UltimateAntic", 5)]
+        [InlineData("Player #6 Multi Word Name disconnected", "Multi Word Name", 6)]
+        public void HandleMessage_PlayerDisconnect_CorrectEventArgs(string message, string expectedName, int expectedId)
+        {
+            var handler = new RconMessageHandler();
+            handler.PlayerDisconnected += (sender, args) =>
+            {
+                Assert.Equal(expectedName, args.Name);
+                Assert.Equal(expectedId, args.GameId);
+            };
+
+            handler.HandleMessage(message);
+        }
+        
+        [Theory]
         [InlineData("(Global) Helle Duval: imagine cheating in arma tho [REDACTED] :)", "Helle Duval", "(Global)", " imagine cheating in arma tho [REDACTED] :)")]
         [InlineData("(Side) Altay: Welcome to the /server/ arma3!!!", "Altay", "(Side)", " Welcome to the /server/ arma3!!!")]
         public void HandleMessage_ChatMessage_CorrectEventArgs(string message, string expectedName, string expectedChannelType, string expectedContent)
