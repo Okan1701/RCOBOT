@@ -85,8 +85,11 @@ namespace RCOBOT.Services.EventChannelService
 
             var embed = new EmbedBuilder
             {
-                Title = $"{args.ChannelType} {args.Name}",
-                Description = args.Content,
+                Author = new EmbedAuthorBuilder
+                {
+                    Name = $"{args.ChannelType} {args.Name}",
+                },
+                Title = args.Content,
                 Timestamp = DateTimeOffset.Now,
                 Color = GetChannelTypeColor(args.ChannelType)
             };
@@ -112,7 +115,7 @@ namespace RCOBOT.Services.EventChannelService
             
             var embed = new EmbedBuilder
             {
-                Title = $"{args.Name} has disconnected from the server!",
+                Title = $":outbox_tray: {args.Name} has disconnected from the server!",
                 Description = $"{DateTime.Now} | ID: {args.GameId}",
                 Color = Color.Red
             };
@@ -138,7 +141,7 @@ namespace RCOBOT.Services.EventChannelService
 
             var embed = new EmbedBuilder
             {
-                Title = $"{args.Name} has connected to the server!",
+                Title = $":inbox_tray: {args.Name} has connected to the server!",
                 Description = $"{DateTime.Now} | ID: {args.GameId}",
                 Color = Color.Green
             };
