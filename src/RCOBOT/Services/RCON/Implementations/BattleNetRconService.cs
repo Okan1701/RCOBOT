@@ -69,7 +69,7 @@ namespace RCOBOT.Services.RCON.Implementations
 
             // If not a pending message, we hand it over to the message handler
             rconMessageHandler.HandleMessage(args.Message);
-            logger.LogInformation($"RCON MESSAGE RECEIVED (ID={args.Id}){Environment.NewLine}{args.Message}");
+            //logger.LogInformation($"RCON MESSAGE RECEIVED (ID={args.Id}){Environment.NewLine}{args.Message}");
         }
 
         private void ClientOnBattlEyeDisconnected(BattlEyeDisconnectEventArgs args)
